@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="/static/CSS/utility.css">
+<link rel="stylesheet" href="/static/CSS/card.css">
+
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+    .glow{
+        background-color: rgba(161, 161, 161, 0.658);
+    }
+
+    .components{
+        padding: 20px;
+        line-height: 0;
+    }
+    .lower{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .t{
+        border: 2px solid ;
+        height: 300px;
+        width: 240px;
+        margin: 10px;
+        flex-direction: column;
+        line-height: 0.8;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .image{
+        
+        overflow: hidden;
+        object-fit: contain;
+        min-height: 50%;
+        min-width: 20%;
+    }
+    .bt1{
+    background-color: #393b45;
+    color: white;
+    padding: 3px 24px;
+    border: 0;
+    border-radius: 20px;
+    }
+    .circle{
+        width: 30px;
+        height: 30px;
+        border: 2px solid white;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        margin: 10px 15px;
+
+    }
+</style>
+<body class="bg txt-clr">
+
+<h2 class="center">Projects</h2>
+
+<form method="post" class="none" id="del-form">
+    <input type="text" name="file" id="del-inp">
+    <input type="number" value="0" name="num" id="del-num">
+</form>
+
+
+<div class="projects flex wrap justify-between m-auto w-80">
+
+    {% for i in range(fn|length)  %}
+
+    <div class="nft">
+        <div class='main'>
+          <img class='tokenImage' src="/static/Downloads/{{i}}.jpg" alt="IMG" />
+          <h2>{{fn[i]}}</h2>
+          <p class='description'>{{fs[i]}} KB</p>
+          <div class='tokenInfo'>
+            <div class="price">
+                
+                <div class="circle border" onclick="direct('/static/Downloads/{{i}}.jpg')">
+                    <img src="/static/svg/edit.svg" alt="" class=" invert">
+                </div>
+                <div class="circle">
+                    <img src="/static/svg/share.svg" alt="" class=" invert">
+                </div>
+                <div class="circle" onclick="del_func('{{i}}.jpg')">
+                    <img src="/static/svg/delete.svg" alt="" class=" invert">
+                </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    {% endfor %}
+
+
+
+</div>
+
+<div id="nav" class="bg lower wfull flex justify-between wrap "  >
+    <div class="components " onclick="direct('/')">
+        <div class="flex justify-center align invert" >
+        <img src="/static/svg/main/home.svg" alt="">
+        </div>
+        <p class="txt-clr">Home</p>
+    </div>
+
+    <div class="components glow" onclick="direct('/projects')" >
+        <div class="flex justify-center align invert" >
+        <img src="/static/svg/main/projects.svg" alt="" >
+        </div>
+        <p class="txt-clr">Projects</p>
+    </div>
+
+    <div class="components" onclick="direct('edit')">
+        <div class="flex justify-center align invert" >
+        <img src="/static/svg/main/add.svg" alt="">
+        </div>
+        <p class="txt-clr">New Project</p>
+    </div>
+
+    <div class="components" onclick="direct('recent')">
+        <div class="flex justify-center align invert" >
+        <img src="/static/svg/main/recent.svg" alt="">
+        </div>
+        <p class="txt-clr">Recent</p>
+    </div>
+
+    <div class="components" onclick="direct('support')">
+        <div class="flex justify-center align invert" >
+        <img src="/static/svg/main/help.svg" alt="">
+        </div>
+        <p class="txt-clr">Support</p>
+    </div>
+
+    
+   
+   
+      
+</div>
+
+</body>
+
+
+<script>
+        function direct(url){
+            document.location=url
+        }
+
+        function del_func(filename){
+            document.getElementById('del-inp').value = filename;
+            document.getElementById('del-num').value = 1;
+            document.getElementById('del-form').submit();
+
+        }
+</script>
+</html>

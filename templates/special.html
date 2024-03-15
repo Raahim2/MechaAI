@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image AI</title>
+    <link rel="stylesheet" href="/static/CSS/utility.css">
+    <link rel="stylesheet" href="/static/CSS/skeleton.css">
+    <script src="/static/JS/app.js"></script>
+
+</head>
+<style>
+ 
+    
+    .para{
+        line-height: 0;
+        justify-self: start;
+    }
+    .bt1{
+        margin: 5px;
+        background-color: #393b45;
+        color: white;
+        padding: 11px 25px;
+        border: 0;
+        border-radius: 20px;
+    }
+    hr{
+        margin: 0;
+        padding: 0;
+        background-color: #393b45;
+        color: #393b45;
+        border: 0;
+        height: 1.5px;
+    }
+    .upload{
+        margin: 25%;
+    }
+    .outer{
+        height: 93vh;
+    }
+    
+    .image{
+        width: 59vw;
+        height: 60vh;
+        overflow: hidden;
+        object-fit: contain;
+    }
+
+    .form{
+        width: 100%;
+    }
+  
+    .scroll {
+        overflow: auto;
+        width: 100%; 
+        height: 100px;
+    }
+    
+</style>
+<body>
+
+
+    <nav class="flex wrap justify-between center bg txt-clr">
+        <div class="flex gap justify-start">
+            <img src="/static/svg/back.svg" alt="" class="invert" onclick="direct('/')">
+            <img src="/static/svg/user.svg" alt="" class="invert">
+            <!-- <div class="para">
+                <p>Username</p>
+                <p>Usrename@gmail.com</p>
+            </div> -->
+
+        </div>
+
+        <div>
+            <button class="bt1">Share</button>
+            <a href="/static/image.jpg" download>
+                <button class="bt1" onclick="handleClick('download')">Download</button>
+            </a>
+        </div> 
+
+    </nav> 
+
+    <hr>
+    
+    <div class="bg flex items-center justify-center txt-clr">
+        <table class="table-auto ">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Object Name</th>
+                    <th class="px-4 py-2">Object Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for i in items  %}
+                <tr>
+                    <td class="border px-4 py-2">{{i}}</td>
+                    <td class="border px-4 py-2">{{item_counts[loop.index-1]}}</td>   
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="border px-4 py-2">Total Count</td>
+                    <td class="border px-4 py-2">{{count}}</td>   
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+    <div class="outer bg flex justify-center align">
+        <div class="bg-white flex justify-center align">
+
+            {% if status %}
+            <div id="uploadBox" class="flex justify-center align "onclick="document.getElementById('fileInput').click()" >
+                <img src="/static/image.jpg" alt="Uploaded Image" class="image">
+            </div> 
+            {% else %}
+            <div id="uploadBox" class="flex justify-center align "onclick="document.getElementById('fileInput').click()" >
+                <img src="/static/uplode.jpg" alt="Uploaded Image" class="image">
+
+            </div> 
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+
+
+
+    <div class="bg lower wfull flex justify-between wrap">
+        <form id="uploadForm" class="bg lower wfull flex justify-between wrap" method="post" enctype="multipart/form-data" class="border form" >
+            <input type="text" id="task" name="task" hidden >
+            <input type="file" class="none" id="fileInput" name="fileInput"  value="static/image.jpg" onchange="submitForm(currentid)" > 
+            <input type="range" min="1" max="100" value="0" class="slider" id="factor" name="factor">
+            <input type="text" id="textt" name="textt" hidden >
+            <input type="number" id="n1" name="n1" value="0" hidden >
+            <input type="number" id="n2" name="n2" value="0" hidden > 
+        </form>
+    <div id="main" class="bg lower wfull flex justify-between wrap" >
+        <div class="components" onclick="change('main','effect')">
+            <div class="flex justify-center align" >
+            <img src="/static/svg/components/stars.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Effect</p>
+        </div>    
+        <div class="components" onclick="change('main','crop')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/crop.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Crop</p>
+        </div>
+        <div class="components" onclick="change('main','rotate')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/rotate-crop.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Rotate</p>
+        </div>
+        <div class="components" onclick="change('main','adjust')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/filter.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Adjust</p>
+        </div>
+        <div class="components" onclick="change('main' ,'text')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/text.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Text</p>
+        </div>   
+        <div class="components" onclick="change('main','ai')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/ai-network.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">AI</p>
+        </div>
+        <div class="components" onclick="direct('projects')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/folder.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Your Projects</p>
+        </div>
+    </div>
+
+    <div id="effect" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('effect','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+        <div class="components" onclick="handleClick('grey')">
+            <div class="flex justify-center align" >
+            <img src="/static/svg/components/filter/grey.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Greyscale</p>
+        </div>    
+        <div class="components" onclick="handleClick('blur')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/filter/blur.jpg" alt="" width="50px">
+            </div>
+            <p class="txt-clr">Blur</p>
+        </div>
+        <div class="components" onclick="handleClick('canny')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/filter/canny.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Canny</p>
+        </div>
+        <div class="components" onclick="handleClick('dilated')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/filter/dilated.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Dilated</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('erod')" >
+            <img src="/static/svg/components/filter/eroded.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Eroded</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('th')" >
+            <img src="/static/svg/components/filter/threshhold.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Thereshold</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('trans')" >
+            <img src="/static/svg/components/filter/trans.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Translate</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('cartoon')" >
+            <img src="/static/svg/components/filter/cartoon.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Cartoon</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('vin')" >
+            <img src="/static/svg/components/filter/vinitage.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Vinitage</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('inv')" >
+            <img src="/static/svg/components/filter/inv.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Invert</p>
+        </div>
+        <div class="components" >
+            <div class="flex justify-center align" onclick="handleClick('poison')" >
+            <img src="/static/svg/components/filter/poison.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">posterize</p>
+        </div>
+    </div>
+
+    <div id="crop" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('crop','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+        <div class="components" onclick="handleClick('crop1')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/crop/crop1.svg" alt="">
+            </div>
+            <p class="txt-clr">1:2</p>
+        </div>  
+        <div class="components" onclick="handleClick('crop2')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/crop/crop3.svg" alt="">
+            </div>
+            <p class="txt-clr">9:16</p>
+        </div>  
+        <div class="components" onclick="handleClick('crop3')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/crop/crop2.svg" alt="">
+            </div>
+            <p class="txt-clr">16:9</p>
+        </div> 
+        <div class="components" onclick="handleClick('crop4')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/crop/crop4.svg" alt="">
+            </div>
+            <p class="txt-clr">3:4</p>
+        </div>  
+        <div class="components" onclick="handleClick('crop5')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/crop/crop5.svg" alt="">
+            </div>
+            <p class="txt-clr">4:3</p>
+        </div>  
+       
+          
+    </div>
+
+    <div id="rotate" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('rotate','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+        <div class="components" onclick="handleClick('fhor')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-horizontal.svg" alt="">
+            </div>
+            <p class="txt-clr">Horizontal Flip</p>
+        </div>  
+        <div class="components" onclick="handleClick('fver')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-vertical.svg" alt="">
+            </div>
+            <p class="txt-clr">Vertical Flip</p>
+        </div>  
+        <div class="components" onclick="handleClick('right')" >
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/rotate-right-01.svg" alt="">
+            </div>
+            <p class="txt-clr">Rotate Right</p>
+        </div> 
+        <div class="components" onclick="handleClick('left')" >
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/rotate-left-01.svg" alt="">
+            </div>
+            <p class="txt-clr">Rotate Left</p>
+        </div> 
+        <div class="components" onclick="handleClick('zoom')" >
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/zoom-in-area.svg" alt="">
+            </div>
+            <p class="txt-clr">Zoom</p>
+        </div> 
+       
+          
+    </div>
+
+    <div id="adjust" class="bg lower wfull flex justify-between wrap none " >
+        
+        <div class="slidecontainer bg center">
+            <input type="range" min="1" max="100" value="50" class="slider" id="temp" name="temp">
+        </div>
+
+        <div class="components" onclick="change('adjust','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+        <div class="components" onclick="handleClick2('bright')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/bright.svg" alt="">
+            </div>
+            <p class="txt-clr">Brightness</p>
+        </div>  
+
+        <div class="components" onclick="handleClick2('dark')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/dark.svg" alt="">
+            </div>
+            <p class="txt-clr">Darkness</p>
+        </div> 
+
+        <div class="components" onclick="handleClick2('exposure')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/exposure.png" alt="" width="30px">
+            </div>
+            <p class="txt-clr">Exposure</p>
+        </div>  
+
+        <div class="components" onclick="handleClick2('contrast')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/contrast.png" alt="" width="30px">
+            </div>
+            <p class="txt-clr">Contrast</p>
+        </div> 
+
+        <div class="components" onclick="handleClick2('saturation')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/saturation.png" alt="" width="30px">
+            </div>
+            <p class="txt-clr">Saturation</p>
+        </div>  
+
+        <div class="components" onclick="handleClick2('hue')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/hue.png" alt="" width="30px">
+            </div>
+            <p class="txt-clr">Hue</p>
+        </div> 
+        
+
+       
+          
+    </div>
+
+    <div id="text" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="slidecontainer bg center txt-clr ">
+        <div>
+            Enter Text : <input type="text"  value="" id="temp2" name="text" class="bg2 txt-clr gap">
+        </div>
+        <div>
+            Enter cordinate 1 : <input type="number"  value="" id="temp3" name="num1" class="bg2 txt-clr">
+        </div>
+        <div>
+            Enter cordinate 2:  <input type="number"  value="" id="temp4" name="num2" class="bg2 txt-clr">
+        </div>
+        </div>
+
+        <div class="components" onclick="change('text','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+
+
+        <div class="components" onclick="handleClick3('text')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-horizontal.svg" alt="">
+            </div>
+            <p class="txt-clr">Add text</p>
+        </div>  
+
+        <div class="components" onclick="handleClick('rect')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-horizontal.svg" alt="">
+            </div>
+            <p class="txt-clr">Add Recatngle</p>
+        </div>  
+
+        <div class="components" onclick="handleClick('line')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-horizontal.svg" alt="">
+            </div>
+            <p class="txt-clr">Add Line</p>
+        </div>  
+
+        <div class="components" onclick="handleClick('circle')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/flip-horizontal.svg" alt="">
+            </div>
+            <p class="txt-clr">Add Circle</p>
+        </div>  
+
+
+        
+       
+          
+    </div>
+
+    <div id="ai" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('ai','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+        <div class="components" onclick="handleClick('detect')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">Object Detection</p>
+        </div>  
+
+        <div class="components" onclick="handleClick('enhance')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">Enhance Image</p>
+        </div>  
+
+        <div class="components" onclick="handleClick('hand')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">Hand Gesture</p>
+        </div>
+
+        <div class="components" onclick="handleClick('emotion')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">Emotion Detection</p>
+        </div>
+
+        <div class="components" onclick="handleClick('inf')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">Deep Dream</p>
+        </div>
+       
+       
+          
+    </div>
+
+
+    </div> 
+   
+</body>
+
+</html>
