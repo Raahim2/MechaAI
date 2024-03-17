@@ -4,7 +4,7 @@ Welcome to our Image Editing Website! This platform offers a comprehensive suite
 
 # Demo 
 
-[![Demo Video](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/IMAGEAI-DEMO.mp4)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE)
+[![Demo Video](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/IMAGEAI-DEMO.mp4)](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/IMAGEAI-DEMO.mp4)
 
 ## Features:
 
