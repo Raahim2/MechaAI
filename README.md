@@ -4,7 +4,6 @@ Welcome to our Image Editing Website! This platform offers a comprehensive suite
 
 # Demo 
 
-https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/Demo1.png
 ![Screenshot 1](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/Demo1.png)
 ![Screenshot 2](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/Demo2.png)
 ![Screenshot 3](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/Demo3.png)
