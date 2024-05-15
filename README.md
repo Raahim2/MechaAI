@@ -10,7 +10,6 @@ You can watch a demo of File Manager in action:
 
 <video controls>
   <source src="https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/IMAGEAI-DEMO.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 # Demo 
