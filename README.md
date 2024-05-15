@@ -3,15 +3,6 @@
 Welcome to our Image Editing Website! This platform offers a comprehensive suite of tools powered by cutting-edge AI technology to enhance your images.
 
 
-
-## Demo Video
-
-You can watch a demo of File Manager in action:
-
-<video controls>
-  <source src="https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/IMAGEAI-DEMO.mp4" type="video/mp4">
-</video>
-
 # Demo 
 
 ![Screenshot 1](https://github.com/Raahim2/ImageAI/blob/main/static/Demo%20Video/Demo1.png)
