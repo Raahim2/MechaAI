@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image AI | Graph</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <style>
+    .bg{
+        background-color:  #161819 !important;
+    }
+    .bg2{
+        background-color: #393b45;
+    }
+
+    .bi {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+
+
+    @media (min-width: 768px) {
+      .sidebar .offcanvas-lg {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 48px;
+      }
+
+      .navbar-search {
+        display: block;
+      }
+    }
+
+    .sidebar .nav-link {
+      font-size: .875rem;
+      font-weight: 500;
+    }
+
+    .sidebar .nav-link.active {
+      color: #ffffff;
+    }
+
+    .sidebar-heading {
+      font-size: .75rem;
+    }
+
+    /*
+ * Navbar
+ */
+
+    .navbar-brand {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      background-color: rgba(0, 0, 0, .25);
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+    }
+
+    .navbar .form-control {
+      padding: .75rem 1rem;
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    .border {
+    border: var(--bs-border-width) var(--bs-border-style) #575859 !important;
+}
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+
+  <!-- navigation -->
+  <nav class="fixed top-0 z-50 w-full border-b border-gray-700 bg ">
+    <div class="px-3 py-2 lg:px-5 lg:pl-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center justify-start rtl:justify-end">
+          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd" fill-rule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+              </path>
+            </svg>
+          </button>
+          <a href="" class="flex ms-2 md:me-24">
+            <img src="/static/IMG/logoai.webp" class="h-8 me-3" alt="Logo" />
+            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">Image AI</span>
+          </a>
+        </div>
+        <div class="flex items-center">
+          <div class="flex items-center ms-3">
+            <div>
+              <button type="button"
+                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <span class="sr-only">Open user menu</span>
+                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  alt="user photo">
+              </button>
+            </div>
+            <p class="text-white m-2">{{username}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- hidden form -->
+  <div>
+   
+    <section class="bg dark:bg-gray-900 z-50 hidden" id="formdiv">
+      <div class="border flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+
+        <div
+          class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div class="top-0 right-0 relative" onclick="hideform()">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+
+            </div>
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Create {{plot}} plot
+            </h1>
+
+            <form class="space-y-4 md:space-y-6" action="/{{username}}/graph/{{plot}}" method="post" id="form2">
+              <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Select necessary columns</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for column in columns %}
+                    <div class="flex items-center m-2 ">
+                        <input id="checkbox-{{ loop.index }}" type="checkbox" value="{{ column }}" name="{{column}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-{{ loop.index }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ column }}</label>
+                    </div>
+                {% endfor %}
+              </div>
+
+
+            <div class="relative mb-6">
+              <label for="default-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of
+                Examples</label>
+                <input id="numex" type="range" value="1" name="numex" min="1" max="{{row_count}}"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+              <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min 1</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">{{row_count/4}}</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">{{(row_count/4)*3}}</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max {{row_count}}</span>
+            </div>
+
+              
+              <button type="submit"
+                class="w-full border bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- main -->
+  <div class="container-fluid bg text-white" id="mainpage">
+
+    <div class="row">
+      <!-- upload form-->
+      <div class="hidden">
+        <form action="/{{username}}/graph/{{plot}}" method="post" class="hidden" id="form"
+          enctype="multipart/form-data">
+          <input type="file" name="csv" id="csv">
+        </form>
+      </div>
+
+      <!-- side nav -->
+      <div class="bg my-5 sidebar border border-right col-md-3 col-lg-2 p-0 ">
+        <div class="bg offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+          aria-labelledby="sidebarMenuLabel">
+
+
+          <div class="bg offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+            <ul class="bg nav flex-column">
+              {% for type in VALID_TYPES%}
+              <li class="bg nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{type}}">
+                  <svg class="bi">
+                    <use xlink:href="#house-fill" />
+                  </svg>
+                  {{type}} Plot
+                </a>
+              </li>
+              {% endfor %}
+
+          
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        
+        <!-- graph nav -->
+        <div
+          class="my-5 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">{{plot}} Plot</h1>
+          {%if error%}
+          <h1>Please Upload a CSV file</h1>
+          {% endif %}
+          <p>{{filename}}</p>
+        </div>
+        {%if filename%}
+        <div class="border p-2 my-4">
+          <div>
+            <div class="mb-2 flex justify-between items-center">
+              <div class="flex items-center gap-x-3">
+                <span class="size-8 flex justify-center items-center border border-gray-200 text-white rounded-lg">
+                  <svg class="flex-shrink-0 size-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.0243 1.43996H7.08805C6.82501 1.43996 6.57277 1.54445 6.38677 1.73043C6.20077 1.91642 6.09631 2.16868 6.09631 2.43171V6.64796L15.0243 11.856L19.4883 13.7398L23.9523 11.856V6.64796L15.0243 1.43996Z" fill="#21A366"></path>
+                    <path d="M6.09631 6.64796H15.0243V11.856H6.09631V6.64796Z" fill="#107C41"></path>
+                    <path d="M22.9605 1.43996H15.0243V6.64796H23.9523V2.43171C23.9523 2.16868 23.8478 1.91642 23.6618 1.73043C23.4758 1.54445 23.2235 1.43996 22.9605 1.43996Z" fill="#33C481"></path>
+                    <path d="M15.0243 11.856H6.09631V21.2802C6.09631 21.5433 6.20077 21.7955 6.38677 21.9815C6.57277 22.1675 6.82501 22.272 7.08805 22.272H22.9606C23.2236 22.272 23.4759 22.1675 23.6618 21.9815C23.8478 21.7955 23.9523 21.5433 23.9523 21.2802V17.064L15.0243 11.856Z" fill="#185C37"></path>
+                    <path d="M15.0243 11.856H23.9523V17.064H15.0243V11.856Z" fill="#107C41"></path>
+                    <path opacity="0.1" d="M12.5446 5.15996H6.09631V19.296H12.5446C12.8073 19.2952 13.0591 19.1904 13.245 19.0046C13.4308 18.8188 13.5355 18.567 13.5363 18.3042V6.1517C13.5355 5.88892 13.4308 5.63712 13.245 5.4513C13.0591 5.26548 12.8073 5.16074 12.5446 5.15996Z" fill="black"></path>
+                    <path opacity="0.2" d="M11.8006 5.90396H6.09631V20.04H11.8006C12.0633 20.0392 12.3151 19.9344 12.501 19.7486C12.6868 19.5628 12.7915 19.311 12.7923 19.0482V6.8957C12.7915 6.6329 12.6868 6.38114 12.501 6.19532C12.3151 6.0095 12.0633 5.90475 11.8006 5.90396Z" fill="black"></path>
+                    <path opacity="0.2" d="M11.8006 5.90396H6.09631V18.552H11.8006C12.0633 18.5512 12.3151 18.4464 12.501 18.2606C12.6868 18.0748 12.7915 17.823 12.7923 17.5602V6.8957C12.7915 6.6329 12.6868 6.38114 12.501 6.19532C12.3151 6.0095 12.0633 5.90475 11.8006 5.90396Z" fill="black"></path>
+                    <path opacity="0.2" d="M11.0566 5.90396H6.09631V18.552H11.0566C11.3193 18.5512 11.5711 18.4464 11.757 18.2606C11.9428 18.0748 12.0475 17.823 12.0483 17.5602V6.8957C12.0475 6.6329 11.9428 6.38114 11.757 6.19532C11.5711 6.0095 11.3193 5.90475 11.0566 5.90396Z" fill="black"></path>
+                    <path d="M1.13604 5.90396H11.0566C11.3195 5.90396 11.5718 6.00842 11.7578 6.19442C11.9438 6.38042 12.0483 6.63266 12.0483 6.8957V16.8162C12.0483 17.0793 11.9438 17.3315 11.7578 17.5175C11.5718 17.7035 11.3195 17.808 11.0566 17.808H1.13604C0.873012 17.808 0.620754 17.7035 0.434765 17.5175C0.248775 17.3315 0.144287 17.0793 0.144287 16.8162V6.8957C0.144287 6.63266 0.248775 6.38042 0.434765 6.19442C0.620754 6.00842 0.873012 5.90396 1.13604 5.90396Z" fill="#107C41"></path>
+                    <path d="M2.77283 15.576L5.18041 11.8455L2.9752 8.13596H4.74964L5.95343 10.5071C6.06401 10.7318 6.14015 10.8994 6.18185 11.01H6.19745C6.27683 10.8305 6.35987 10.6559 6.44669 10.4863L7.73309 8.13596H9.36167L7.09991 11.8247L9.41897 15.576H7.68545L6.29489 12.972C6.22943 12.861 6.17387 12.7445 6.12899 12.6238H6.10817C6.06761 12.7419 6.01367 12.855 5.94748 12.9608L4.51676 15.576H2.77283Z" fill="white"></path>
+                  </svg>
+                </span>
+                <div>
+                  <p class="text-sm font-medium text-white">{{filename}}</p>
+                  <p class="text-xs text-white">7 KB</p>
+                </div>
+              </div>
+              <div class="inline-flex items-center gap-x-2">
+                <a class="text-gray-500 hover:text-gray-800" href="#">
+                  <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="4" height="16" x="6" y="4"></rect>
+                    <rect width="4" height="16" x="14" y="4"></rect>
+                  </svg>
+                </a>
+                <a class="text-gray-500 hover:text-gray-800" href="#">
+                  <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-x-3 whitespace-nowrap">
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500" style="width: 100%"></div>
+              </div>
+              <div class="w-6 text-end">
+                <span class="text-sm text-gray-800">100%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+
+        
+        <div class="border relative">
+          <!-- side buttons -->
+          <div class="absolute top-0 right-0 m-2">
+            <div  class="group">
+              <div id="speed-dial-menu-text-inside-button" class="flex flex-col items-center  mb-4 space-y-2">
+                  <button type="button" onclick="uploadcsv()" class="bg w-[56px] h-[56px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+                      <svg class="w-4 h-4 mx-auto mb-1 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                          <path d="M14.419 10.581a3.564 3.564 0 0 0-2.574 1.1l-4.756-2.49a3.54 3.54 0 0 0 .072-.71 3.55 3.55 0 0 0-.043-.428L11.67 6.1a3.56 3.56 0 1 0-.831-2.265c.006.143.02.286.043.428L6.33 6.218a3.573 3.573 0 1 0-.175 4.743l4.756 2.491a3.58 3.58 0 1 0 3.508-2.871Z"/>
+                      </svg>
+                      <span class="block mb-px text-xs font-medium text-white">Upload</span>
+                  </button>
+                  <button type="button" onclick="showform()"  class="bg w-[56px] h-[56px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+                      <svg class="w-4 h-4 mx-auto mb-1 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                          <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+                      </svg>
+                      <span class="block mb-px text-xs font-medium text-white">Generate</span>
+                  </button>
+                  <button type="button" class="bg w-[56px] h-[56px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+                      <svg class="w-4 h-4 mx-auto mb-1 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
+                          <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+                      </svg>
+                      <span class="block mb-px text-xs font-medium text-white">Random</span>
+                  </button>
+                  <button type="button" class="bg w-[56px] h-[56px] text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+                      <svg class="w-4 h-4 mx-auto mb-1 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                          <path d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z"/>
+                          <path d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z"/>
+                      </svg>
+                      <span class="block mb-px text-xs font-medium text-white">Copy</span>
+                  </button>
+              </div>
+            </div>
+          </div>
+
+          {% if generated %}
+          <img src="/static/image.jpg" alt="" class="border mx-auto" width="700px">
+          {% else %}
+          <img src="/static/statistics_bar_chart.png" alt="" class="border mx-auto" width="700px">
+          {%endif%}
+        </div>
+
+        <!-- csv data display -->
+        <div class="bg text-white">
+          <div class="p-4 border border-gray-200 dark:border-gray-700 mt-4">
+            <div class="relative overflow-x-auto">
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-white uppercase bg dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    {% for column in columns %}
+                    <th scope="col" class="px-6 py-3">
+                      {{ column }}
+                    </th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for row in data %}
+                  <tr class="bg text-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    {% for cell in row %}
+                    <td class="px-6 py-3">
+                      {{ cell }}
+                    </td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    {% for cell in row %}
+                    <td class="px-6 py-3">
+                      ...
+                    </td>
+                    {% endfor %}
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+</body>
+<script>
+  function showform() {
+    let div = document.getElementById('formdiv')
+    let main = document.getElementById('mainpage')
+    div.classList.remove('hidden')
+    main.classList.add('hidden')
+  }
+  function hideform() {
+    let div = document.getElementById('formdiv')
+    let main = document.getElementById('mainpage')
+    div.classList.add('hidden')
+    main.classList.remove('hidden')
+  }
+
+
+  function uploadcsv() {
+    let form = document.getElementById('form')
+    let csv = document.getElementById('csv')
+
+    csv.click()
+    csv.addEventListener('change', function () {
+      form.submit();
+    });
+  }
+</script>
+
+</html>

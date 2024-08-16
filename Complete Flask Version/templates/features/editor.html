@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image AI | Editor</title>
+    <link rel="stylesheet" href="/static/CSS/utility.css">
+    <link rel="stylesheet" href="/static/CSS/skeleton.css">
+    <script src="/static/JS/app.js"></script>
+
+</head>
+<style>
+ 
+    .para{
+        line-height: 0;
+        justify-self: start;
+    }
+    .bt1{
+        margin: 5px;
+        background-color: #393b45;
+        color: white;
+        padding: 11px 25px;
+        border: 0;
+        border-radius: 20px;
+    }
+    hr{
+        margin: 0;
+        padding: 0;
+        background-color: #393b45;
+        color: #393b45;
+        border: 0;
+        height: 1.5px;
+    }
+    .upload{
+        margin: 25%;
+    }
+    .outer{
+        height: 93vh;
+    }
+    
+    .image{
+        width: 59vw;
+        height: 60vh;
+        overflow: hidden;
+        object-fit: contain;
+    }
+
+    .form{
+        width: 100%;
+    }
+  
+    .scroll {
+        overflow: auto;
+        width: 100%; 
+        height: 100px;
+    }
+    
+</style>
+<body>
+
+
+    <nav class="flex wrap justify-between center bg txt-clr">
+        <div class="flex gap justify-start">
+            <img src="/static/svg/back.svg" alt="" class="invert" onclick="direct('/dash')">
+            <img src="/static/svg/user.svg" alt="" class="invert">
+            <div class="para">
+                <p>Username</p>
+                <p>Usrename@gmail.com</p>
+            </div>
+
+        </div>
+
+        <div>
+            <button class="bt1">Share</button>
+            <!-- <a href="/static/image.jpg" download> -->
+                <button class="bt1" onclick="handleClick('download')">Download</button>
+            <!-- </a> -->
+        </div> 
+
+    </nav> 
+    
+    <hr>
+    {%if task =="detect"%}
+    <div class="bg flex items-center justify-center txt-clr">
+        <table class="table-auto ">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Object Name</th>
+                    <th class="px-4 py-2">Object Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for i in items  %}
+                <tr>
+                    <td class="border px-4 py-2">{{i}}</td>
+                    <td class="border px-4 py-2">{{item_counts[loop.index-1]}}</td>   
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="border px-4 py-2">Total Count</td>
+                    <td class="border px-4 py-2">{{count}}</td>   
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    {%endif%}
+
+    <div class="outer bg flex justify-center align">
+        <div class="bg-white flex justify-center align">
+
+            {% if status %}
+            <div id="uploadBox" class="flex justify-center align "onclick="document.getElementById('fileInput').click()" >
+                <img src="/static/image.jpg" alt="Uploaded Image" class="image">
+            </div> 
+            {% else %}
+            <div id="uploadBox" class="flex justify-center align "onclick="document.getElementById('fileInput').click()" >
+                <img src="/static/uplode.jpg" alt="Uploaded Image" class="image">
+            </div> 
+            {% endif %}
+        </div>
+    </div>
+
+
+    <hr>
+
+
+
+    <div class="bg lower wfull flex justify-between wrap">
+        <form id="uploadForm" class="bg lower wfull flex justify-between wrap" method="post" enctype="multipart/form-data" class="border form" >
+            <input type="text" id="task" name="task" hidden >
+            <input type="file" class="none" id="fileInput" name="fileInput"  value="static/image.jpg" onchange="submitForm(currentid)" > 
+            <input type="range" min="1" max="100" value="0" class="slider" id="factor" name="factor">
+            <input type="text" id="textt" name="textt" hidden >
+            <input type="number" id="n1" name="n1" value="0" hidden >
+            <input type="number" id="n2" name="n2" value="0" hidden >
+        </form>
+
+    <div id="main" class="bg lower wfull flex justify-between wrap" >
+        <div class="components" onclick="change('main','effect')">
+            <div class="flex justify-center align" >
+            <img src="/static/svg/components/stars.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Effect</p>
+        </div>    
+        <div class="components" onclick="change('main','crop')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/crop.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Crop</p>
+        </div>
+        <div class="components" onclick="change('main','rotate')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/rotate-crop.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Rotate</p>
+        </div>
+        <div class="components" onclick="change('main','adjust')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/filter.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Adjust</p>
+        </div>
+        <div class="components" onclick="change('main' ,'text')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/text.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Text</p>
+        </div>   
+        <div class="components" onclick="change('main','ai')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/components/ai-network.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">AI</p>
+        </div>
+        <div class="components" onclick="direct('projects')">
+            <div class="flex justify-center align">
+            <img src="/static/svg/folder.svg" alt="" class="invert">
+            </div>
+            <p class="txt-clr">Your Projects</p>
+        </div>
+    </div>
+
+    <div id="effect" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('effect','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+        {% for function in FUNCTIONS.filters %}
+        <div class="components" onclick="handleClick('{{function}}')">
+            <div class="flex justify-center align" >
+            <img src="/static/svg/components/filter/{{function}}.jpg" alt=""  width="50px">
+            </div>
+            <p class="txt-clr">{{function}}</p>
+        </div> 
+        {% endfor %}
+    </div>
+
+    <div id="crop" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('crop','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+        {% set count = 0 %}
+        {% for function in FUNCTIONS.cropping %}
+            {% set count = count + 1 %}
+            <div class="components" onclick="handleClick('{{function}}')">
+                <div class="flex justify-center align invert">
+                    <img src="/static/svg/components/crop/crop{{ count }}.svg" alt="">
+                </div>
+                <p class="txt-clr">{{ function }}</p>
+            </div>  
+        {% endfor %}
+
+       
+          
+    </div>
+
+    <div id="rotate" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('rotate','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div> 
+        
+        {% for function in FUNCTIONS.rotate %}
+        <div class="components" onclick="handleClick('{{function}}')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/rotate/{{function}}.svg" alt="">
+            </div>
+            <p class="txt-clr">{{function}}</p>
+        </div>  
+        {% endfor %}
+          
+    </div>
+
+    <div id="adjust" class="bg lower wfull flex justify-between wrap none " >
+        
+        <div class="slidecontainer bg center">
+            <input type="range" min="1" max="100" value="50" class="slider" id="temp" name="temp">
+        </div>
+
+        <div class="components" onclick="change('adjust','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+                
+        {% for function in FUNCTIONS.adjust %}
+        <div class="components" onclick="handleClick2('{{function}}')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/adjust/{{function}}.png" alt="" width="30px">
+            </div>
+            <p class="txt-clr">{{function}}</p>
+        </div> 
+        {% endfor %}
+
+
+          
+    </div>
+
+    <div id="text" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="slidecontainer bg center txt-clr ">
+        <div>
+            Enter Text : <input type="text"  value="" id="temp2" name="text" class="bg2 txt-clr gap">
+        </div>
+        <div>
+            Enter cordinate 1 : <input type="number"  value="" id="temp3" name="num1" class="bg2 txt-clr">
+        </div>
+        <div>
+            Enter cordinate 2:  <input type="number"  value="" id="temp4" name="num2" class="bg2 txt-clr">
+        </div>
+    </div>
+
+        <div class="components" onclick="change('text','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+
+
+        
+
+        {% for function in FUNCTIONS.text %}
+        <div class="components" onclick="handleClick3('{{function}}')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/text.svg" alt="">
+            </div>
+            <p class="txt-clr">{{function}}</p>
+        </div>  
+        {%endfor%}
+
+    
+    </div>
+
+    <div id="ai" class="bg lower wfull flex justify-between wrap none"  >
+        <div class="components" onclick="change('ai','main')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/back.svg" alt="">
+            </div>
+            <p class="txt-clr">Back</p>
+        </div>  
+
+        {% for function in FUNCTIONS.ai %}
+        <div class="components" onclick="handleClick('{{function}}')">
+            <div class="flex justify-center align invert" >
+            <img src="/static/svg/components/ai/detect.svg" alt="">
+            </div>
+            <p class="txt-clr">{{function}}</p>
+        </div>  
+        {%endfor%}
+         
+    
+        
+
+    
+          
+    </div>
+
+    
+    
+
+
+
+
+    </div> 
+   
+</body>
+
+</html>
