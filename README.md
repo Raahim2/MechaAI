@@ -1,4 +1,4 @@
-# Image Editing Website
+# Image And File Editing Website
 
 Welcome to our Image Editing Website! This platform offers a comprehensive suite of tools powered by cutting-edge AI technology to enhance your images.
 
@@ -28,4 +28,4 @@ Welcome to our Image Editing Website! This platform offers a comprehensive suite
 To start using our Image Editing Website, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/Raahim2/ImageAI
+git clone https://github.com/Raahim2/MechaAI
