@@ -1,31 +1,27 @@
-# Image And File Editing Website
+# MECHA AI
 
-Welcome to our Image Editing Website! This platform offers a comprehensive suite of tools powered by cutting-edge AI technology to enhance your images.
+![MECHA AI](https://img.shields.io/badge/MECHA%20AI-v1.0-blue)
 
+MECHA AI is a powerful web application designed to edit images and files with ease. The platform currently supports all kinds of images, PDFs, and CSV files, leveraging cutting-edge machine learning technologies for advanced editing capabilities.
 
-# Demo 
+## Features
 
-[Demo](https://github.com/Raahim2/Raahim2/blob/main/Projects%20Demo%20Video/IMAGEAI-DEMO.mp4)
+- **Image Editing**: Edit all types of images with tools powered by machine learning algorithms.
+- **PDF Editing**: Modify PDF documents, extract text, and more.
+- **CSV Editing**: Manage and edit CSV files with intuitive tools.
+- **Multi-File Support**: Upload and edit multiple file types simultaneously.
+- **User-Friendly Interface**: Built with React for a responsive and seamless user experience.
 
-## Features:
+## Technology Stack
 
-- **Intuitive Interface**: User-friendly design for easy navigation and editing.
-  
-- **Advanced Object Detection**: Identify and manipulate specific objects within images with precision.
-  
-- **Versatile Editing Tools**: Crop, resize, color correct, apply filters, add text, and more.
-  
-- **Smart Enhancements**: AI-powered features to automatically enhance image quality and composition.
-  
-- **Collaborative Editing**: Share projects with team members and collaborate in real-time.
-  
-- **Multiple Image Effects**: Seamlessly access and edit images with our effect features.
-  
-- **Customizable Templates**: Design custom templates for recurring editing tasks.
+- **Backend**: [Flask](https://flask.palletsprojects.com/)
+- **Frontend**: [React](https://reactjs.org/)
+- **Machine Learning**: Integration of various ML models for image and file processing
+- **Hosting**: Your choice of hosting service
 
-## Getting Started:
+## Installation
 
-To start using our Image Editing Website, clone the repository to your local machine:
+1. Clone the repository:
 
-```bash
-git clone https://github.com/Raahim2/MechaAI
+   ```bash
+   git clone https://github.com/Raahim2/MechaAI.git
