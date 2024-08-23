@@ -4,6 +4,10 @@
 
 MECHA AI is a powerful web application designed to edit images and files with ease. The platform currently supports all kinds of images, PDFs, and CSV files, leveraging cutting-edge machine learning technologies for advanced editing capabilities.
 
+# Demo 
+
+[Demo](https://github.com/Raahim2/Raahim2/blob/main/Projects%20Demo%20Video/IMAGEAI-DEMO.mp4)
+
 ## Features
 
 - **Image Editing**: Edit all types of images with tools powered by machine learning algorithms.
