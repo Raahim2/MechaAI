@@ -10,22 +10,59 @@ MECHA AI is a powerful web application designed to edit images and files with ea
 
 ## Features
 
-- **Image Editing**: Edit all types of images with tools powered by machine learning algorithms.
-- **PDF Editing**: Modify PDF documents, extract text, and more.
-- **CSV Editing**: Manage and edit CSV files with intuitive tools.
-- **Multi-File Support**: Upload and edit multiple file types simultaneously.
-- **User-Friendly Interface**: Built with React for a responsive and seamless user experience.
+- **Image Editing:** Advanced tools for cropping, resizing, and enhancing images with AI-powered features.
+- **File Management:** Efficient handling and organization of various file types.
+- **User-Friendly Interface:** Built with React and Tailwind CSS for a modern and responsive design.
+- **Fast Development:** Utilizes Vite for fast and optimized development and build processes.
+- **Machine Learning Integration:** AI-driven features for intelligent image enhancements.
 
-## Technology Stack
+## Technologies Used
 
-- **Backend**: [Flask](https://flask.palletsprojects.com/)
-- **Frontend**: [React](https://reactjs.org/)
-- **Machine Learning**: Integration of various ML models for image and file processing
-- **Hosting**: Your choice of hosting service
+- **Backend:** Flask
+- **Frontend:** React, Vite, Tailwind CSS
+- **Machine Learning:** Integrated ML models for image processing
 
-## Installation
+## Getting Started
 
-1. Clone the repository:
+### Prerequisites
+
+- Python 3.x
+- Node.js and npm
+- Flask
+- React
+
+### Installation
+
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/Raahim2/MechaAI.git
+   cd MechaAI
+
+
+2. **Install backend dependencies:**
+
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+
+3. **Install frontend dependencies:**
+
+   ```bash
+   cd ../Frontend
+   npm install
+   npm run dev
+
+4. **Run the backend server:**
+
+   ```bash
+   cd ../Backend
+   python main.py
+
+
+### Contributing
+Contributions are welcome! Please open an issue or submit a pull request to help improve MECHA AI.
+
+
+
+   
