@@ -62,6 +62,7 @@ MECHA AI is a powerful web application designed to edit images and files with ea
 
 ### Contributing
 Contributions are welcome! Please open an issue or submit a pull request to help improve MECHA AI.
+.
 
 
 
